@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "CrearUsuario";
+
+    var listaRoles = ViewBag.rolesList;
+}
+@model PreguntasRespuetas.Models.RegistroUsuarioDTO
+
+<div class="container mt-5">
+
+    <h2>Registrar Usuario</h2>
+    <hr />
+
+
+    <div class="col-md-6">
+        <form action="@Url.Action("CrearUsuario","Admin")" method="post">
+
+            <div class="form-group">
+                <label for="usuario">Usuario:</label>
+                <input type="text" class="form-control" name="usuario" placeholder="Ingrese su usuario" required>
+                @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group">
+                <label for="clave">Contraseña:</label>
+                <input type="password" class="form-control" name="clave" placeholder="Ingrese su clave" required>
+                @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label for="clave">Rol:</label>
+                <select class="form-select" name="idRol" required>
+                    <option selected disabled hidden value="">Seleccione una opción</option>
+                    @foreach (var item in listaRoles)
+                    {
+                        <option value="@item.Id">@item.Nom_Rol</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.idRol, "", new { @class = "text-danger" })
+
+            </div>
+
+            @if (ViewBag.ErrorCrearUsuario != null)
+            {
+                <div class="alert alert-danger mt-2" role="alert">
+                    <center>
+                        @ViewBag.ErrorCrearUsuario
+                    </center>
+                </div>
+            }
+
+
+            <div class="form-group mt-4">
+                <input class="btn btn-primary" type="submit" value="Registrar" />
+                <a href="@Url.Action("Index","Admin")" class="btn btn-primary">Atras</a>
+            </div>
+
+        </form>
+    </div>
+
+
+</div>
+

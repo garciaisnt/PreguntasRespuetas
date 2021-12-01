@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title - Preguntas y respuestas</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ">
+        <div class="container">
+
+
+
+
+            @if ((string)Session["rolUsuario"] == "admin")
+            {
+                <a class="navbar-brand" href="@Url.Action("Index", "Admin")">Preguntas y Repuestas</a>
+            }
+            else
+            {
+                <a class="navbar-brand" href="@Url.Action("Index", "Pregunta")">Preguntas y Repuestas</a>
+
+            }
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @*<li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="@Url.Action("Index", "Home")">Home</a>
+                    </li>*@
+                    @*<li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Admin")">Usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Pregunta")">Preguntas</a>
+                </li>*@
+
+                </ul>
+
+                @if (Session["usuario"] != null)
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @Session["usuario"]
+
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                            <li><a class="dropdown-item " href="@Url.Action("CerrarSesion","Home")">Cerrar Sesión </a></li>
+                        </ul>
+                    </div>
+                }
+
+
+
+
+            </div>
+        </div>
+
+    </nav>
+
+
+
+
+
+
+
+
+
+
+    <div class="container ">
+        @RenderBody()
+
+        <footer class="fixed-bottom">
+            <div class="container">
+                <p>&copy; @DateTime.Now.Year - PyR | Carlos García</p>
+
+            </div>
+        </footer>
+    </div>
+
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿@using EN
+@using PreguntasRespuetas.Utilidades;
+@{
+    ViewBag.Title = "Respuestas";
+    List<RespuestaEN> respuestas = ViewBag.Respuestas;
+    PreguntaEN pregunta = ViewBag.Pregunta as PreguntaEN;
+}
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Respuestas</h2>
+
+            <div class="d-flex justify-content-end">
+
+                @if (pregunta.Estado.Nom_Estado == "cerrado")
+                {
+                    <button class="btn btn-danger" disabled>Pregunta Cerrada</button>
+                }
+                else
+                {
+                    <a href="@Url.Action("Responder","Pregunta", new { Id = pregunta.Id})" class="btn btn-success">Responder pregunta</a>
+                }
+
+                <a href="@Url.Action("Index","Pregunta")" class="btn btn-outline-primary">Regresar</a>
+            </div>
+
+        </div>
+
+    </div>
+    <hr />
+
+
+    <div class="card mt-3">
+        <div class="card-header">
+            @pregunta.Usuario.Usuario - @Utilidades.TimeAgo(pregunta.Fecha_Creacion) |
+
+            @if ((long)Session["idUsuario"] == pregunta.Usuario.Id)
+            {
+                <a href="@Url.Action("CerrarPregunta","Pregunta", new { Id = pregunta.Id })" class="btn btn-danger btn-sm">Cerrar</a>
+
+            }
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@pregunta.Pregunta</h5>
+        </div>
+    </div>
+
+    <h3 class="mt-3">Respuestas</h3>
+    <hr />
+
+    @foreach (RespuestaEN respuesta in respuestas)
+    {
+        <div class="card">
+            <div class="card-header">
+                @respuesta.Usuario.Usuario | @Utilidades.TimeAgo(respuesta.Fecha_Creacion)
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <footer class="blockquote-footer">@respuesta.Respuesta</footer>
+                </blockquote>
+            </div>
+        </div>
+    }
+
+
+
+
+
+</div>
+

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Crear";
+}
+@model PreguntasRespuetas.Models.PreguntaDTO
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Haz una nueva pregunta</h2> 
+        </div>
+
+    </div>
+    <hr />
+
+    <form action="@Url.Action("Crear","Pregunta")" method="post">
+
+        <div class="input-group">
+            <textarea class="form-control" name="pregunta" maxlength="255" cols="20" rows="7"></textarea>
+        </div>
+        @Html.ValidationMessageFor(model => model.pregunta, "", new { @class = "text-danger" })
+        <div class="input-group mt-3">
+            <input class="btn btn-primary btn-large" type="submit" value="¡Enviar!" />
+        </div>
+
+    </form>
+
+</div>

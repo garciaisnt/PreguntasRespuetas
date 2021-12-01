@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Responder";
+}
+@model PreguntasRespuetas.Models.RespuestaDTO
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Responder Pregunta</h2>
+        </div>
+
+    </div>
+    <hr />
+
+    <form action="@Url.Action("Responder","Pregunta")" method="post">
+
+        <div class="input-group">
+            <input type="hidden" name="IdPregunta" value="@ViewBag.IdPregunta" />
+            <textarea class="form-control" name="respuesta" maxlength="255" cols="20" rows="7"></textarea>
+        </div>
+        @Html.ValidationMessageFor(model => model.respuesta, "", new { @class = "text-danger" })
+    <div class="input-group mt-3">
+        <input class="btn btn-primary btn-large" type="submit" value="¡Enviar!" />
+        <a href="@Url.Action("Respuestas","Pregunta", new { Id = @ViewBag.IdPregunta })" class="btn btn-outline-danger">Regresar</a>
+    </div>
+
+    </form>
+
+</div>
+
+

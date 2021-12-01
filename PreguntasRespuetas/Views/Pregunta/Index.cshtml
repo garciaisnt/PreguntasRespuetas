@@ -1,0 +1,44 @@
+﻿
+@using PreguntasRespuetas.Utilidades;
+@{
+    ViewBag.Title = "Index";
+}
+@model List<EN.PreguntaEN>
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Preguntas</h2>
+
+            <div class="d-flex justify-content-end">
+                <a href="@Url.Action("Crear","Pregunta")" class="btn btn-success">Hacer una pregunta</a>
+            </div>
+
+        </div>
+
+    </div>
+    <hr />
+
+    @foreach (var item in Model)
+    {
+        <div class="card mt-3">
+            <div class="card-header">
+                @if ((long)Session["idUsuario"] == item.Usuario.Id)
+                {
+                    <span class="badge bg-success">Tú</span>
+                }
+                @item.Usuario.Usuario - @Utilidades.TimeAgo(item.Fecha_Creacion)
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@item.Pregunta</h5>
+                <a href="@Url.Action("Respuestas","Pregunta", new { Id = item.Id })" class="btn btn-outline-primary btn-sm">Ver respuestas</a>
+            </div>
+        </div>
+    }
+
+
+</div>
+
+
+
