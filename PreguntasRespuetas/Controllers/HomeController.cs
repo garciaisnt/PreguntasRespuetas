@@ -2,16 +2,16 @@
 using EN;
 using System;
 using PreguntasRespuetas.Models;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace PreguntasRespuetas.Controllers
 {
     public class HomeController : Controller
     {
-        UsuarioDAL usuarioDAL = new UsuarioDAL();
+        
         public ActionResult Index()
         {
+            UsuarioDAL usuarioDAL = new UsuarioDAL();
             ViewBag.NumeroUsuarios = usuarioDAL.Consultar().Count;
             return View();
         }
@@ -20,6 +20,9 @@ namespace PreguntasRespuetas.Controllers
         public ActionResult Index(LoginDTO model)
         {
             UsuarioDAL usuarioDAL = new UsuarioDAL();
+
+            ViewBag.NumeroUsuarios = usuarioDAL.Consultar().Count;
+            
             RolDAL rolDAL = new RolDAL();
 
             if (ModelState.IsValid && ( usuarioDAL.Consultar().Count > 0) )
@@ -41,6 +44,8 @@ namespace PreguntasRespuetas.Controllers
         [HttpPost]
         public ActionResult Login(LoginDTO model)
         {
+            UsuarioDAL usuarioDAL = new UsuarioDAL();
+
             ViewBag.NumeroUsuarios = usuarioDAL.Consultar().Count;
 
             if (ModelState.IsValid)
