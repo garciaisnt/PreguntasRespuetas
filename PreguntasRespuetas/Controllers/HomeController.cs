@@ -25,7 +25,7 @@ namespace PreguntasRespuetas.Controllers
             
             RolDAL rolDAL = new RolDAL();
 
-            if (ModelState.IsValid && ( usuarioDAL.Consultar().Count > 0) )
+            if (ModelState.IsValid && ( usuarioDAL.Consultar().Count == 0) )
             {
                 UsuarioEN usuario = new UsuarioEN();
                 usuario.Usuario = model.usuario;
